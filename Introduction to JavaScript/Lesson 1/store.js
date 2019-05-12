@@ -17,11 +17,24 @@ function ready() {
         button.addEventListener('click', removeCartItem)
     }
 
+
+
     var quantityInputs = document.getElementsByClassName('cart-quantity-input')
+    var qps = document.getElementsByClassName('qtyplus')
+    var qms = document.getElementsByClassName('qtyminus')
+    for (var i = 0; i < qps.length; i++) {
+        var input = qps[i]
+        input.addEventListener('click', quantityChangedPlus)
+    }
+    for (var i = 0; i < qms.length; i++) {
+        var input = qms[i]
+        input.addEventListener('click', quantityChangedMinus)
+    }
     for (var i = 0; i < quantityInputs.length; i++) {
         var input = quantityInputs[i]
         input.addEventListener('change', quantityChanged)
     }
+
 
     var addToCartButtons = document.getElementsByClassName('shop-item-button')
     for (var i = 0; i < addToCartButtons.length; i++) {
@@ -132,7 +145,65 @@ function quantityChanged(event) {
     updateCartTotal()
 }
 
+function quantityChangedPlus(event) {
+    console.log("quantityChanged PLUS and event.target")
+    var input = event.target
+    console.log(input)
+
+    var shopItem = input.parentElement.parentElement.parentElement
+    console.log("shop item")
+    console.log(shopItem)
+    itemName = shopItem.getElementsByClassName('shop-item-title')[0].innerText
+    pp = shopItem.getElementsByClassName('shop-item-price')[0].innerText
+    qq = shopItem.getElementsByClassName('cart-quantity-input')[0].value
+    qq =  parseInt(qq)+1
+   
+    if (isNaN(qq) || qq <= 0) {
+        qq = 0
+    }
+   
+    shopItem.getElementsByClassName('cart-quantity-input')[0].value = qq
+    imageSrc = shopItem.getElementsByClassName('shop-item-image')[0].src
+    console.log(pp)
+    console.log(qq)
+    console.log(itemName)
+
+
+   // console.log("quantityChanged")
+    addItemToCart(itemName, pp, imageSrc)
+    updateCartTotal()
+}
+
+
+function quantityChangedMinus(event) {
+    console.log("quantityChanged PLUS and event.target")
+    var input = event.target
+    console.log(input)
+
+    var shopItem = input.parentElement.parentElement.parentElement
+    console.log("shop item")
+    console.log(shopItem)
+    itemName = shopItem.getElementsByClassName('shop-item-title')[0].innerText
+    pp = shopItem.getElementsByClassName('shop-item-price')[0].innerText
+    qq = shopItem.getElementsByClassName('cart-quantity-input')[0].value
+    qq =  parseInt(qq)-1
+
+    if (isNaN(qq) || qq <= 0) {
+        qq = 0
+    }
+
+    shopItem.getElementsByClassName('cart-quantity-input')[0].value = qq
+    imageSrc = shopItem.getElementsByClassName('shop-item-image')[0].src
+    console.log(pp)
+    console.log(qq)
+    console.log(itemName)
+   // console.log("quantityChanged")
+    addItemToCart(itemName, pp, imageSrc)
+    updateCartTotal()
+}
+
 function addToCartClicked(event) {
+    console.log("addToCartClicked")
     var button = event.target
     var shopItem = button.parentElement.parentElement
     var title = shopItem.getElementsByClassName('shop-item-title')[0].innerText
@@ -144,6 +215,7 @@ function addToCartClicked(event) {
 }
 
 function addItemToCart(title, price, imageSrc) {
+    console.log("adding to cart...")
     var cartRow = document.createElement('div')
     cartRow.classList.add('cart-row1')
     var cartItems = document.getElementsByClassName('cart-items1')[0]
@@ -181,6 +253,7 @@ function addItemToCart(title, price, imageSrc) {
 }
 
 function updateCartTotal() {
+    console.log("updating card total")
     var cartItemContainer = document.getElementsByClassName('cart-items1')[0]
     var cartItemNames = cartItemContainer.getElementsByClassName('cart-item-title1')
     var cartRows = cartItemContainer.getElementsByClassName('cart-row1')

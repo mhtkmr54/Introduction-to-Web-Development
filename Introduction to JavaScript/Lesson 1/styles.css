@@ -309,7 +309,7 @@ html, body {
 
 .cart-quantity-input {
     height: 25px;
-    width: 38px;
+    width: 25px;
     border-radius: 5px;
     border: 1px solid #56CCF2;
     background-color: #eee;
@@ -317,7 +317,8 @@ html, body {
     padding: 0;
     text-align: right;
     font-size: 11px;
-    margin-right: 25px;
+    margin-left: 0px;
+    margin-right: 0px;
 }
 
 .cart-quantity-input1 {
@@ -368,6 +369,11 @@ html, body {
 
 
 
+    .side-by-side
+    {
+      float:left;
+      padding:0px 20px;
+    }
 
 
 
@@ -383,7 +389,13 @@ html, body {
 
 
 
-
+.qty {
+    width: 30px;
+    height: 25px;
+    text-align: center;
+}
+input.qtyplus { width:35px; height:25px;}
+input.qtyminus { width:35px; height:25px;}
 
 
 
