@@ -8,6 +8,8 @@ var itemName
 var qq
 var pp
 
+
+
 function ready() {
     var removeCartItemButtons = document.getElementsByClassName('btn-danger')
     for (var i = 0; i < removeCartItemButtons.length; i++) {
@@ -25,6 +27,28 @@ function ready() {
     for (var i = 0; i < addToCartButtons.length; i++) {
         var button = addToCartButtons[i]
         button.addEventListener('click', addToCartClicked)
+    }
+
+
+    var tabs = document.getElementsByClassName("tab");
+      document.getElementById("food").style.display = "block";
+      document.getElementById("cereals").style.display = "none";
+/*      document.getElementById("edu1").style.display = "none";
+      document.getElementById("confirmPosition").style.display = "none";
+      document.getElementById("edu").style.display = "block";
+      document.getElementById("but").style.display = "block";*/
+    console.log(tabs)
+    for (var i = 0; i < tabs.length; i++) {
+      tabs[i].addEventListener("click", function() {
+      var current = document.getElementsByClassName("active")
+      var currentid = current[0].firstElementChild.className
+      current[0].className = current[0].className.replace(" active", "")
+      this.className += " active"
+      var nextid = this.firstElementChild.className
+      document.getElementById(currentid).style.display = "none";
+      document.getElementById(nextid).style.display = "block";
+
+      })
     }
 
     document.getElementsByClassName('btn-purchase')[0].addEventListener('click', purchaseClicked)
@@ -49,23 +73,37 @@ function removeCartItem(event) {
     console.log(name)
     buttonClicked.parentElement.parentElement.remove()
     
-    var cartItemContainer = document.getElementsByClassName('cart-items')[0]
-    console.log("cart container identified")
-    console.log(cartItemContainer)
-    var cartItemNames = cartItemContainer.getElementsByClassName('cart-item-title')
-    var cartRows = cartItemContainer.getElementsByClassName('cart-row')
-    console.log(cartRows)
-    for (var i = 0; i < cartRows.length; i++) {
-        if (cartRows[i].getElementsByClassName('cart-item-title')[0].innerText == name ) {
-            console.log("got the below to be zero")
-            console.log(cartItemNames[i].innerText)
-            console.log("below cart row selected")
-            console.log(cartRows[i])
+   
+    var carts = document.getElementsByClassName('cart-items')
+    console.log(" All carts corpus and carts.length")
+    console.log(carts)
+    console.log(carts.length)
+//    console.log(cartRows)
+    for (var j = 0; j < carts.length; j++) {
+        var cartItemContainer = document.getElementsByClassName('cart-items')[j]
+        console.log("for Loop operation : cart container identified")
+        console.log(cartItemContainer)
+        var cartItemNames = cartItemContainer.getElementsByClassName('cart-item-title')
+        var cartRows = cartItemContainer.getElementsByClassName('cart-row')
+        for (var i = 0; i < cartRows.length; i++) {
+            console.log("below both should be equal")
+            //console.log(cartRows[i].getElementsByClassName('cart-item-title')[0].innerText)
+            name = name.trim()
+            console.log(name)
+            var name1 = cartRows[i].getElementsByClassName('cart-item-title')[0].innerText
+            name1 = name1.trim()
+            console.log(name1)
+            console.log(name1==name)
+            if (name1==name) {
+                console.log("got the below to be zero")
+                console.log(cartItemNames[i].innerText)
+                console.log("below cart row selected")
+                console.log(cartRows[i])
 
-            cartRows[i].getElementsByClassName('cart-quantity-input')[0].value = 0
+                cartRows[i].getElementsByClassName('cart-quantity-input')[0].value = 0
+            }
         }
     }
-
     updateCartTotal()
 
 }
