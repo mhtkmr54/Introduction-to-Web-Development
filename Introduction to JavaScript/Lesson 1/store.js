@@ -46,6 +46,7 @@ function ready() {
     var tabs = document.getElementsByClassName("tab");
       document.getElementById("food").style.display = "block";
       document.getElementById("cereals").style.display = "none";
+      document.getElementById("desserts").style.display = "none";
 /*      document.getElementById("edu1").style.display = "none";
       document.getElementById("confirmPosition").style.display = "none";
       document.getElementById("edu").style.display = "block";
